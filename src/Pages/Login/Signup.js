@@ -1,9 +1,59 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 
 import { Link } from 'react-router-dom';
 import PrimaryButton from '../../Components/Button/PrimaryButton';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Signup = () => {
+  const { createUser, verifyEmail, profileUpdate } = useContext(AuthContext);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const image = form.image.files[0];
+    const email = form.email.value;
+    const password = form.password.value;
+    // console.log(name, image, email, password);
+
+    const formData = new FormData();
+    formData.append('image', image);
+
+    const url = `https://api.imgbb.com/1/upload?key=e974a009e2abcd02240ce68247e7cf5f`;
+    //console.log(url);
+
+    fetch(url, {
+      method: 'POST',
+      body: formData
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.data.display_url);
+        const photo = data.data.display_url;
+        createUser(email, password)
+          .then((result) => {
+            const user = result.user;
+            console.log(user);
+            toast.success('user created successfully');
+            form.reset();
+            profileUpdate(name, photo)
+              .then(() => console.log('profile updated'))
+              .catch((error) => console.error(error.message));
+
+            verifyEmail()
+              .then(() => {
+                toast.success('check your verification link in your email');
+              })
+              .catch((error) => console.error(error.message));
+          })
+
+          .catch((error) => console.error(error.message));
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
   return (
     <div className="flex justify-center items-center pt-8">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
@@ -11,7 +61,11 @@ const Signup = () => {
           <h1 className="my-3 text-4xl font-bold">Signup</h1>
           <p className="text-sm text-gray-400">Create a new account</p>
         </div>
-        <form noValidate="" action="" className="space-y-12 ng-untouched ng-pristine ng-valid">
+        <form
+          onSubmit={handleSubmit}
+          noValidate=""
+          action=""
+          className="space-y-12 ng-untouched ng-pristine ng-valid">
           <div className="space-y-4">
             <div>
               <label htmlFor="email" className="block mb-2 text-sm">
@@ -31,7 +85,7 @@ const Signup = () => {
               <label htmlFor="image" className="block mb-2 text-sm">
                 Select Image:
               </label>
-              <input type="file" id="image" name="image" accept="image/*" required />
+              <input type="file" name="image" id="" accept="image/*" required />
             </div>
             <div>
               <label htmlFor="email" className="block mb-2 text-sm">

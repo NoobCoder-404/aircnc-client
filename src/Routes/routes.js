@@ -6,7 +6,7 @@ import Login from '../Pages/Login/Login';
 import Signup from '../Pages/Login/Signup';
 import ErrorPage from '../Pages/Shared/ErrorPage';
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: '/',
     element: <Main />,
