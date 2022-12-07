@@ -4,11 +4,19 @@ import toast from 'react-hot-toast';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import PrimaryButton from '../../Components/Button/PrimaryButton';
+import SmallSpinner from '../../Components/Spinner/SmallSpinner';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const Signup = () => {
-  const { createUser, verifyEmail, profileUpdate, googleSignIn, githubSignIn } =
-    useContext(AuthContext);
+  const {
+    createUser,
+    verifyEmail,
+    profileUpdate,
+    googleSignIn,
+    githubSignIn,
+    loading,
+    setLoading
+  } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || '/';
@@ -56,6 +64,7 @@ const Signup = () => {
         const photo = data.data.display_url;
         createUser(email, password)
           .then((result) => {
+            setLoading(false);
             const user = result.user;
             console.log(user);
             navigate(from, { replace: true });
@@ -146,7 +155,13 @@ const Signup = () => {
               <PrimaryButton
                 type="submit"
                 classes="w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100">
-                Sign up
+                {loading ? (
+                  <>
+                    <SmallSpinner />
+                  </>
+                ) : (
+                  <>Sign up</>
+                )}
               </PrimaryButton>
             </div>
           </div>
