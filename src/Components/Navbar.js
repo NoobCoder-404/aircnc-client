@@ -26,7 +26,7 @@ const Navbar = () => {
           <span className="ml-3 text-2xl font-bold ">Aircnc</span>
         </Link>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          {user?.email ? (
+          {user?.uid ? (
             <>
               <div className="relative inline-block ">
                 <button

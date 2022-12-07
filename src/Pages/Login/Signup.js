@@ -2,18 +2,22 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import PrimaryButton from '../../Components/Button/PrimaryButton';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const Signup = () => {
   const { createUser, verifyEmail, profileUpdate, googleSignIn, githubSignIn } =
     useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || '/';
   const handleGoogleSignUp = () => {
     googleSignIn()
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(from, { replace: true });
       })
       .catch((error) => console.error(error.message));
   };
@@ -23,6 +27,7 @@ const Signup = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(from, { replace: true });
       })
       .catch((error) => console.error(error.message));
   };
@@ -53,6 +58,7 @@ const Signup = () => {
           .then((result) => {
             const user = result.user;
             console.log(user);
+            navigate(from, { replace: true });
             toast.success('user created successfully');
             form.reset();
             profileUpdate(name, photo)
