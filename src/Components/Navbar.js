@@ -1,11 +1,21 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import PrimaryButton from '../Components/Button/PrimaryButton';
 import { AuthContext } from '../contexts/AuthProvider';
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  console.log(user);
+  const handleSignOut = () => {
+    logOut()
+      .then(() => {
+        toast.success('Log out successfully');
+      })
+      .catch((error) => console.error(error.message));
+  };
 
   return (
     <header className="text-gray-900 body-font shadow-sm">
@@ -64,7 +74,9 @@ const Navbar = () => {
                           fill="currentColor"></path>
                       </svg>
 
-                      <span className="mx-1">Sign Out</span>
+                      <span onClick={handleSignOut} className="mx-1">
+                        Sign Out
+                      </span>
                     </div>
                   </div>
                 )}

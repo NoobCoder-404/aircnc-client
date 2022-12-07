@@ -51,7 +51,7 @@ const AuthProvider = ({ children }) => {
   const verifyEmail = () => {
     return sendEmailVerification(auth.currentUser);
   };
-  const logOut = (auth) => {
+  const logOut = () => {
     setLoading(true);
     return signOut(auth);
   };
