@@ -23,7 +23,7 @@ const HomeCard = () => {
           <StarIcon className="h3 w-3 text-green-500" />
           <StarIcon className="h3 w-3 text-green-500" />
           <StarIcon className="h3 w-3 text-green-500" />
-          <StarIcon className="h3 w-3 text-green-500" /> <span>64</span>
+          <StarIcon className="h3 w-3 text-green-500" /> <span className="px-1">64</span>
         </div>
       </div>
     </div>

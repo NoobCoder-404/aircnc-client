@@ -22,7 +22,7 @@ const ExpCard = ({ exp }) => {
           <StarIcon className="h3 w-3 text-green-500" />
           <StarIcon className="h3 w-3 text-green-500" />
           <StarIcon className="h3 w-3 text-green-500" />
-          <StarIcon className="h3 w-3 text-green-500" /> <span className="px-2">{rating}</span>
+          <StarIcon className="h3 w-3 text-green-500" /> <span className="px-1">{rating}</span>
         </div>
       </div>
     </div>
