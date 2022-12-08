@@ -1,8 +1,10 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { setAuthToken } from '../../api/auth';
 import PrimaryButton from '../../Components/Button/PrimaryButton';
 import SmallSpinner from '../../Components/Spinner/SmallSpinner';
 import { AuthContext } from '../../contexts/AuthProvider';
@@ -24,6 +26,7 @@ const Signup = () => {
     googleSignIn()
       .then((result) => {
         const user = result.user;
+        setAuthToken(user);
         console.log(user);
         navigate(from, { replace: true });
       })
@@ -34,6 +37,7 @@ const Signup = () => {
     githubSignIn()
       .then((result) => {
         const user = result.user;
+        setAuthToken(user);
         console.log(user);
         navigate(from, { replace: true });
       })
@@ -51,8 +55,8 @@ const Signup = () => {
     const formData = new FormData();
     formData.append('image', image);
 
-    const url = `https://api.imgbb.com/1/upload?key=e974a009e2abcd02240ce68247e7cf5f`;
-    //console.log(url);
+    const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_KEY}`;
+    console.log(url);
 
     fetch(url, {
       method: 'POST',
@@ -60,18 +64,21 @@ const Signup = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data.display_url);
+        //console.log(data.data.display_url);
         const photo = data.data.display_url;
         createUser(email, password)
           .then((result) => {
             setLoading(false);
             const user = result.user;
-            console.log(user);
+            setAuthToken(user);
+            //console.log(user);
             navigate(from, { replace: true });
             toast.success('user created successfully');
             form.reset();
             profileUpdate(name, photo)
-              .then(() => console.log('profile updated'))
+              .then(() => {
+                //console.log('profile updated');
+              })
               .catch((error) => console.error(error.message));
 
             verifyEmail()
