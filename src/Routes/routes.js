@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../Layout/Main';
+import Checkout from '../Pages/Checkout';
 import Details from '../Pages/Details';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login/Login';
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
       {
         path: '/search-result',
         element: <SearchResult />
+      },
+      {
+        path: '/checkout',
+        element: <Checkout />
       }
     ]
   }

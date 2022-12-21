@@ -9,6 +9,7 @@ import {
   UserIcon
 } from '@heroicons/react/24/solid';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PrimaryButton from '../Components/Button/PrimaryButton';
 
 const Details = () => {
@@ -177,13 +178,15 @@ const Details = () => {
             <span className="text-gray-900 font-bold">Total</span>
             <span className="ml-auto text-gray-900">${total}</span>
           </div>
-          <div className="mt-6 mb-2">
-            <PrimaryButton
-              type="submit"
-              classes="w-full px-4 py-2 tracking-wide transition-colors duration-300 transform rounded-md">
-              Reserve
-            </PrimaryButton>
-          </div>
+          <Link to={'/checkout'}>
+            <div className="mt-6 mb-2">
+              <PrimaryButton
+                type="submit"
+                classes="w-full px-4 py-2 tracking-wide transition-colors duration-300 transform rounded-md">
+                Reserve
+              </PrimaryButton>
+            </div>
+          </Link>
           <p className="text-center text-gray-400 mb-6">You won't be charged yet!</p>
         </div>
       </div>

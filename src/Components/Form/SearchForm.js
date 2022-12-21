@@ -23,7 +23,7 @@ const SearchForm = () => {
       to: departureDate
     };
     console.log(query);
-    navigate('/search-result');
+    navigate('/search-result', { state: query });
   };
   return (
     <div className="w-full max-w-sm p-6 m-auto mx-auto">
