@@ -2,7 +2,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-const WhosComing = ({ setSelectedIndex, host }) => {
+const WhosComing = ({ setSelectedIndex, host, bookingData, setBookingData }) => {
+  const { message } = bookingData;
   console.log(host);
   return (
     <>
@@ -22,6 +23,8 @@ const WhosComing = ({ setSelectedIndex, host }) => {
       <textarea
         className="border block my-5 p-2"
         placeholder={`Hello ${host?.name}! Cant wait to spend 4 night in your home`}
+        value={message}
+        onChange={(event) => setBookingData({ ...bookingData, message: event.target.value })}
         name=""
         id=""
         cols="60"
