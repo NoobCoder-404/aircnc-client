@@ -2,6 +2,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Tab } from '@headlessui/react';
 import React, { Fragment, useContext, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { saveBooking } from '../api/bookings';
 import CheckoutCart from '../Components/CheckoutCart';
 import Payment from '../Components/Payment';
 import ReviewHouse from '../Components/ReviewHouse';
@@ -40,6 +42,15 @@ const Checkout = () => {
 
   const handleBooking = () => {
     console.log(bookingData);
+    saveBooking(bookingData)
+      .then((data) => {
+        console.log(data);
+        toast.success('Pay successful');
+      })
+      .catch((err) => {
+        console.error(err.message);
+        toast.error(err.message);
+      });
   };
 
   return (
