@@ -1,8 +1,10 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
-import Dashboard from '../Layout/DashboardLayout';
+import DashboardLayout from '../Layout/DashboardLayout';
 import Main from '../Layout/Main';
 import Checkout from '../Pages/Checkout';
+import BecomeAHost from '../Pages/Dashborad/BecomeAHost';
+import MyBookings from '../Pages/Dashborad/MyBookings';
 import Welcome from '../Pages/Dashborad/Welcome';
 import Details from '../Pages/Details';
 import Home from '../Pages/Home';
@@ -11,6 +13,7 @@ import Signup from '../Pages/Login/Signup';
 import SearchResult from '../Pages/SearchResult';
 import ComingSoon from '../Pages/Shared/ComingSoon';
 import ErrorPage from '../Pages/Shared/ErrorPage';
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
   {
@@ -44,17 +47,41 @@ export const router = createBrowserRouter([
       },
       {
         path: '/checkout',
-        element: <Checkout />
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        )
       }
     ]
   },
   {
     path: '/dashboard',
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: '',
         element: <Welcome />
+      },
+      {
+        path: 'my-bookings',
+        element: (
+          <PrivateRoute>
+            <MyBookings />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: 'become-host',
+        element: (
+          <PrivateRoute>
+            <BecomeAHost />
+          </PrivateRoute>
+        )
       }
     ]
   }
