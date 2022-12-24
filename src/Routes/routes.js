@@ -3,6 +3,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import DashboardLayout from '../Layout/DashboardLayout';
 import Main from '../Layout/Main';
 import Checkout from '../Pages/Checkout';
+import AllBookings from '../Pages/Dashborad/AllBookings';
+import AllUsers from '../Pages/Dashborad/AllUsers';
 import BecomeAHost from '../Pages/Dashborad/BecomeAHost';
 import MyBookings from '../Pages/Dashborad/MyBookings';
 import Welcome from '../Pages/Dashborad/Welcome';
@@ -66,6 +68,22 @@ export const router = createBrowserRouter([
       {
         path: '',
         element: <Welcome />
+      },
+      {
+        path: 'all-users',
+        element: (
+          <PrivateRoute>
+            <AllUsers />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: 'all-bookings',
+        element: (
+          <PrivateRoute>
+            <AllBookings />
+          </PrivateRoute>
+        )
       },
       {
         path: 'my-bookings',

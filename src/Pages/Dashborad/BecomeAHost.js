@@ -7,13 +7,14 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const BecomeAHost = () => {
   const { user } = useContext(AuthContext);
-
   const [role, setRole] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getRole(user?.email).then((data) => {
       console.log(data);
       setRole(data);
+      setLoading(false);
     });
   }, [user]);
 
@@ -34,9 +35,15 @@ const BecomeAHost = () => {
       .catch((error) => console.error(error.message));
   };
   return (
-    <div>
-      <BecomeHostForm handleSubmit={handleSubmit} />
-    </div>
+    <>
+      {role ? (
+        <div className="h-screen text-gray-600 flex flex-col justify-center items-center pb-16 text-xl lg:text-3xl">
+          Request Sent, wait for admin approval
+        </div>
+      ) : (
+        <>{!loading && <BecomeHostForm handleSubmit={handleSubmit} />}</>
+      )}
+    </>
   );
 };
 

@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import PrimaryButton from '../Components/Button/PrimaryButton';
 
 import { AuthContext } from '../contexts/AuthProvider';
+import AdminMenu from '../Pages/Dashborad/AdminMenu';
+import HostMenu from '../Pages/Dashborad/HostMenu';
 import UserMenu from './UserMenu';
 // import AdminMenu from './AdminMenu';
 // import HostMenu from './HostMenu';
@@ -71,12 +73,11 @@ const Sidebar = ({ role, loading }) => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
-              {/* {role && role !== 'requested' ? (
+              {role && role !== 'requested' ? (
                 <>{role === 'admin' ? <AdminMenu /> : <HostMenu />} </>
               ) : (
                 <UserMenu />
-              )} */}
-              <UserMenu />
+              )}
             </nav>
           </div>
         </div>

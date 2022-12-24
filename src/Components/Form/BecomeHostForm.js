@@ -27,7 +27,7 @@ const BecomeHostForm = ({ handleSubmit }) => {
               <label
                 htmlFor="image"
                 className="p-3 text-center rounded-md cursor-pointer text-gray-500 font-bold border  border-green-600 hover:bg-gradient-to-r hover:from-blue-500 hover:to-green-400 hover:border-white hover:text-white">
-                <input type="file" name="image" id="image" accept="image/*" hidden />
+                <input type="file" name="image" id="image" accept="image/*" />
               </label>
             </div>
 
