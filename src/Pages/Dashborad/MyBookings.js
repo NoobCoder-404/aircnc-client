@@ -6,7 +6,7 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [bookings, setBookings] = useState([]);
   useEffect(() => {
     getAllBookingsByEmail(user?.email)
